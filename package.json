@@ -8,22 +8,27 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "generate-data": "node --max-old-space-size=4096 data/productDataGenerator.js && node --max-old-space-size=4096 data/relatedDataGenerator.js",
     "db": "mysql -u root < schema.sql",
     "watch": "webpack --watch",
-    "start": "node server/index.js",
-    "test": "jest",
+    "start": "nodemon server/index.js",
+    "test": "jest --coverage",
     "lint": "eslint ./client/index.jsx ./client/components/** ./server/**"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "mysql": "^2.16.0",
-    "node-fetch": "^2.2.0",
+    "nodemon": "^1.18.3",
+    "pg": "^7.4.3",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
+    "aws-sdk": "^2.288.0",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
@@ -38,9 +43,9 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
     "jest": "^23.4.1",
+    "node-fetch": "^2.2.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.1",
-    "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.4"
   }
 }
