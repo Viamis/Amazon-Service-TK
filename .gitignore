@@ -25,5 +25,11 @@ build/
 dist/
 public/bundle.js
 
-#images
+# Images
 images/
+
+# Data
+data/generation/sampleData/*.tsv
+data/postgres-schema.sql
+data/cassandra-schema.cql
+*.err*
