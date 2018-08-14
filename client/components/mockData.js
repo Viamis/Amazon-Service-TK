@@ -23,16 +23,18 @@ module.exports = {
     reviews: [7, 5, 12, 85, 120],
     questions: 48,
     seller: 'Aamazon',
-    thumbnail: 'Nano.jpg',
+    // thumbnail: 'Nano.jpg',
   },
-  related: [{
-    id: 4,
-    price: {
-      msrp: 119.98,
-      list: 89.98,
-      sale: 89.98,
+  related: [
+    {
+      id: 4,
+      price: {
+        msrp: 119.98,
+        list: 89.98,
+        sale: 89.98,
+      },
+      product_tier: 'Turbo',
+      // thumbnail: 'Turbo.jpg',
     },
-    product_tier: 'Turbo',
-    thumbnail: 'Turbo.jpg',
-  }],
+  ],
 };

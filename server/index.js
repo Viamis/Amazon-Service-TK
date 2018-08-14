@@ -1,27 +1,36 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 const path = require('path');
 const cors = require('cors');
-const database = require('./database.js');
+const cluster = require('cluster');
+const router = require('./router.js');
 
-const app = express();
-
-app.use(cors());
-app.use(bodyParser.json());
-
-app.get('*/bundle.js', (req, res) => {
-  res.sendFile(path.join(path.dirname(__dirname), 'public/bundle.js'));
-});
-
-
-app.get('/products/:id', (req, res) => {
-  if (parseInt(req.params.id, 10)) {
-    database.getAll(req.params.id, results => res.send(results));
-  } else {
-    res.end();
+const masterProcess = () => {
+  const numCPUs = require('os').cpus().length;
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
   }
-});
+};
 
-app.use('/*', express.static(path.join(path.dirname(__dirname), 'public')));
+const childProcess = () => {
+  const port = process.env.PORT || 3003;
+  const app = express();
 
-app.listen(3003, () => console.log('Listening on port 3003'));
+  app.use(cors());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(router);
+  app.use(compression());
+
+  app.use('/:id', express.static(path.join(__dirname, '../public')));
+
+  app.listen(port, () => console.log(`Listening on port ${port}`));
+};
+
+if (cluster.isMaster) {
+  masterProcess();
+} else {
+  childProcess();
+}

@@ -7,8 +7,14 @@ const ListItemOne = (props) => {
 
   return (
     <li>
-      <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onSelect} data-id={null} data-tier={tier}>
-        <img src={`https://s3-us-west-1.amazonaws.com/viamis/${thumbnail}`} alt={tier} />
+      <div
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onClick={onSelect}
+        data-id={null}
+        data-tier={tier}
+      >
+        <img src={thumbnail} alt={tier} />
       </div>
     </li>
   );
@@ -20,8 +26,14 @@ const ListItems = (props) => {
 
   return (
     <li key={object.id}>
-      <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onSelect} data-id={`/${object.id}/`} data-tier={object.product_tier}>
-        <img src={`https://s3-us-west-1.amazonaws.com/viamis/${object.thumbnail}`} alt={object.thumbnail} />
+      <div
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onClick={onSelect}
+        data-id={`/${object.id}/`}
+        data-tier={object.product_tier}
+      >
+        <img src={object.thumbnail} alt={object.thumbnail} />
       </div>
     </li>
   );
@@ -36,17 +48,21 @@ const ItemColors = (props) => {
     <div>
       <div>
         <h4 className={styles.colorName}>
-          Tier:&nbsp;
+Tier:&nbsp;
         </h4>
         <span>
           {tier}
         </span>
       </div>
       <ul className={styles.list}>
-        { related.length > 0
-          ? <ListItemOne handlers={handlers} thumbnail={thumbnail} tier={tier} />
-          : <span /> }
-        { related.map((el, idx) => <ListItems handlers={handlers} object={el} key={`item${idx + 1}`} />) }
+        {related.length > 0 ? (
+          <ListItemOne handlers={handlers} thumbnail={thumbnail} tier={tier} />
+        ) : (
+          <span />
+        )}
+        {related.map((el, idx) => (
+          <ListItems handlers={handlers} object={el} key={`item${idx + 1}`} />
+        ))}
       </ul>
     </div>
   );
