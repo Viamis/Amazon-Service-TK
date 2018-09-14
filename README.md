@@ -1,6 +1,8 @@
 # Amazon Product Information & Pricing 
 
-> An app meant to mimic a typical Amazon product page
+> Product Info Component of a Product Marketing Page
+
+![Alt Text](https://media.giphy.com/media/jUgAN6xPOi2IArL0in/giphy.gif)
 
 ## Related Projects
 
